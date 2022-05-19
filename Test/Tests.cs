@@ -87,5 +87,14 @@ namespace Test
             }
             Assert.AreEqual(true, field.IsGameEnded);
         }
+
+        [Test]
+        public void ExceptionOnPuttingBlockOnNotEmptyCell()
+        {
+            var field = new Field(5);
+            field.PlaceBox(0,4);
+            Action action = () => field.PlaceBox(0, 4);
+            action.Should().Throw<ArgumentException>();
+        }
     }
 }

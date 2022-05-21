@@ -7,9 +7,9 @@ namespace TowerBuilder.Domain
     public class Field : IField
     {
         public Box[,] field = null;
-        public int Size { get; set; }
+        public static int Size { get; set; }
         public int Level { get; set; }
-        public int PseudoX { get; set; }
+        public int PseudoX { get; set; } = Size / 2;
         public bool IsGameEnded = false;
         public int HardDelay { get; set; }
         public int StartMoveDelay { get; set; } = 650;
@@ -27,12 +27,12 @@ namespace TowerBuilder.Domain
             PseudoX = (size-1) / 2;
         }
 
-        public void PlaceBox(int x, int y)
+        public void PlaceBox(int x , int y)
         {
-            if (field[x, y] != null)
+            if (field[PseudoX, Level] != null)
                 throw new ArgumentException("На данном поле уже есть блок");
-            field[x, y] = new Box();
-            MoveBlockVertical(x, y);
+            field[PseudoX, Level] = new Box();
+            MoveBlockVertical(PseudoX, Level);
         }
 
         public void MovePseudoBlockHorizontal()

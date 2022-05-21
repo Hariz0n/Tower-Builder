@@ -10,5 +10,10 @@ namespace TowerBuilder.Domain
         
         public string Name { get; set; }
         public Field Field { get; set; }
+
+        public override string ToString()
+        {
+            return "Player: " + Name;
+        }
     }
 }

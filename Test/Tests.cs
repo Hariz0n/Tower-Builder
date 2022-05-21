@@ -1,6 +1,5 @@
 ﻿using System;
 using NUnit.Framework;
-using TowerBuilder;
 using FluentAssertions;
 using TowerBuilder.Domain;
 

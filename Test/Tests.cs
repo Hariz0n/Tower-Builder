@@ -19,18 +19,31 @@ namespace Test
         public void IsContainsBlock()
         {
             var field = new Field(5, Difficulty.Easy);
-            field.PlaceBox(0, 0);
-            field.IsEmpty(0, 4).Should().BeFalse();
+            field.PlaceBox();
+            field.IsEmpty(0, 2).Should().BeTrue();
         }
         
         [Test]
         public void IsContainsTwoBlocks()
         {
             var field = new Field(5, Difficulty.Easy);
-            field.PlaceBox(0, 0);
-            field.PlaceBox(0, 0);
-            field.IsEmpty(0, 3).Should().BeFalse();
-            field.IsEmpty(0, 4).Should().BeFalse();
+            field.PlaceBox();
+            field.IsEmpty(2, 4).Should().BeFalse();
+            field.IsEmpty(2, 3).Should().BeTrue();
+            field.PlaceBox();
+            field.IsEmpty(2, 4).Should().BeFalse();
+            field.IsEmpty(2, 3).Should().BeFalse();
+        }
+
+        [Test]
+        public void IsGameEnding()
+        {
+            var field = new Field(5, Difficulty.Easy);
+            for (int i = 0; i < 5; i++)
+            {
+                field.PlaceBox();
+            }
+            Assert.IsTrue(field.IsGameEnded);
         }
         
         [Test]
@@ -61,19 +74,19 @@ namespace Test
         public void LevelChanged()
         {
             var field = new Field(5, Difficulty.Easy);
-            field.PlaceBox(field.PseudoX, field.Level);
+            field.PlaceBox();
             Assert.AreEqual(3, field.Level);
         }
         
         [Test]
-        public void LevelChangedOn3InRowAndOneOnTop()
+        public void LevelChangedOnColumnOf4()
         {
             var field = new Field(5, Difficulty.Easy);
-            field.PlaceBox(field.PseudoX-1, field.Level);
-            field.PlaceBox(field.PseudoX, field.Level);
-            field.PlaceBox(field.PseudoX+1, field.Level);
-            field.PlaceBox(field.PseudoX+1, field.Level);
-            Assert.AreEqual(2, field.Level);
+            field.PlaceBox();
+            field.PlaceBox();
+            field.PlaceBox();
+            field.PlaceBox();
+            Assert.AreEqual(0, field.Level);
         }
         
         [Test]
@@ -82,18 +95,42 @@ namespace Test
             var field = new Field(5, Difficulty.Easy);
             for (int i = 0; i < 5; i++)
             {
-                field.PlaceBox(field.PseudoX, field.Level);
+                field.PlaceBox();
             }
             Assert.AreEqual(true, field.IsGameEnded);
         }
+        
 
         [Test]
-        public void ExceptionOnPuttingBlockOnNotEmptyCell()
+        public void IsGameNotStarted()
         {
-            var field = new Field(5, Difficulty.Easy);
-            field.PlaceBox(0,4);
-            Action action = () => field.PlaceBox(0, 4);
-            action.Should().Throw<ArgumentException>();
+            var game = new Game(Difficulty.Easy);
+            Assert.AreEqual(Stages.NotStarted, game.Stage);
+        }
+
+        [Test]
+        public void IsGameStarting()
+        {
+            var game = new Game(Difficulty.Easy);
+            game.Start("PlayerA");
+            Assert.AreEqual(Stages.Started, game.Stage);
+            Assert.AreEqual("PlayerA", game.Player1.Name);
+        }
+
+        [Test]
+        public void IsGameFinishing()
+        {
+            var game = new Game(Difficulty.Easy);
+            game.Start("PlayerA");
+            game.EndGame();
+            Assert.AreEqual(Stages.Finished, game.Stage);
+        }
+
+        [Test]
+        public void IsGameChangingStageToFinishedToFromNotStarted()
+        {
+            var game = new Game(Difficulty.Easy);
+            Assert.AreEqual(Stages.NotStarted, game.Stage);
         }
     }
 }

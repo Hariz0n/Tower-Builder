@@ -11,14 +11,14 @@ namespace Test
         [Test]
         public void IsEmpty()
         {
-            var field = new Field(5);
+            var field = new Field(5, Difficulty.Easy);
             field.IsEmpty(0, 0).Should().BeTrue();
         }
 
         [Test]
         public void IsContainsBlock()
         {
-            var field = new Field(5);
+            var field = new Field(5, Difficulty.Easy);
             field.PlaceBox(0, 0);
             field.IsEmpty(0, 4).Should().BeFalse();
         }
@@ -26,7 +26,7 @@ namespace Test
         [Test]
         public void IsContainsTwoBlocks()
         {
-            var field = new Field(5);
+            var field = new Field(5, Difficulty.Easy);
             field.PlaceBox(0, 0);
             field.PlaceBox(0, 0);
             field.IsEmpty(0, 3).Should().BeFalse();
@@ -36,7 +36,7 @@ namespace Test
         [Test]
         public void MoveHorizontalFourTimesGridFive()
         {
-            var field = new Field(5);
+            var field = new Field(5, Difficulty.Easy);
             for (int i = 0; i < 4; i++)
             {
                 field.MovePseudoBlockHorizontal();
@@ -48,7 +48,7 @@ namespace Test
         [Test]
         public void MoveHorizontalSixTimesGridFive()
         {
-            var field = new Field(5);
+            var field = new Field(5, Difficulty.Easy);
             for (int i = 0; i < 6; i++)
             {
                 field.MovePseudoBlockHorizontal();
@@ -60,7 +60,7 @@ namespace Test
         [Test]
         public void LevelChanged()
         {
-            var field = new Field(5);
+            var field = new Field(5, Difficulty.Easy);
             field.PlaceBox(field.PseudoX, field.Level);
             Assert.AreEqual(3, field.Level);
         }
@@ -68,7 +68,7 @@ namespace Test
         [Test]
         public void LevelChangedOn3InRowAndOneOnTop()
         {
-            var field = new Field(5);
+            var field = new Field(5, Difficulty.Easy);
             field.PlaceBox(field.PseudoX-1, field.Level);
             field.PlaceBox(field.PseudoX, field.Level);
             field.PlaceBox(field.PseudoX+1, field.Level);
@@ -79,7 +79,7 @@ namespace Test
         [Test]
         public void IsGameEnded()
         {
-            var field = new Field(5);
+            var field = new Field(5, Difficulty.Easy);
             for (int i = 0; i < 5; i++)
             {
                 field.PlaceBox(field.PseudoX, field.Level);
@@ -90,7 +90,7 @@ namespace Test
         [Test]
         public void ExceptionOnPuttingBlockOnNotEmptyCell()
         {
-            var field = new Field(5);
+            var field = new Field(5, Difficulty.Easy);
             field.PlaceBox(0,4);
             Action action = () => field.PlaceBox(0, 4);
             action.Should().Throw<ArgumentException>();

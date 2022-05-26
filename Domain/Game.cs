@@ -5,23 +5,27 @@ namespace TowerBuilder.Domain
     public class Game
     {
         private Difficulty Difficulty { get; }
-        private Player _player1;
+        public Player Player1;
         private Stages _stages = Stages.NotStarted;
 
         public event Action<Stages> StageChanged; 
         public Game(Difficulty dif)
         {
             Difficulty = dif;
-            _player1 = new Player("Player 1", new Field(5));
         }
 
-        public void Start(string name)
+        public void Start(string name, Difficulty difficulty)
         {
-            _player1 = new Player(name, new Field(7));
+            Player1 = new Player(name, new Field(7, difficulty));
             ChangeStage(Stages.Started);
         }
 
-        void ChangeStage(Stages stage)
+        public void EndGame()
+        {
+            ChangeStage(Stages.Finished);
+        }
+
+        public void ChangeStage(Stages stage)
         {
             _stages = stage;
             StageChanged?.Invoke(stage);

@@ -11,7 +11,7 @@ namespace TowerBuilder.Views
         private Game _game;
         public InstructingControl()
         {
-            InitializeComponent();
+            BackColor = Color.DimGray;
             Padding = new Padding(20);
             var table = new TableLayoutPanel()
             {
@@ -29,7 +29,8 @@ namespace TowerBuilder.Views
                 Text = Resources.InstructionLabel,
                 Font = new Font("Arial",  16),
                 Location = new Point(Padding.All, Padding.All),
-                Size = new Size(Width, 25)
+                Size = new Size(Width, 25),
+                ForeColor = Color.White
             };
             var instructionText = new Label()
             {
@@ -38,12 +39,15 @@ namespace TowerBuilder.Views
                 Text = Resources.Instruction,
                 Font = new Font("Arial", 14),
                 AutoSize = true,
+                ForeColor = Color.White
             };
             var button = new Button()
             {
                 Size = new Size(200 , 40),
                 Text = Resources.Start_a_game,
-                Font = new Font("Arial", 14)
+                Font = new Font("Arial", 14),
+                ForeColor = Color.Yellow,
+                BackColor = Color.Black,
             };
             
             button.Click += ButtonOnClick;

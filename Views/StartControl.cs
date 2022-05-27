@@ -39,7 +39,6 @@ namespace TowerBuilder.Views
                 Size = new Size(180, 30),
                 Font = new Font("Arial", 10),
                 Location = new Point(Padding.All + 45, label.Bottom + 15),
-                Margin = new Padding(0,0,0,10)
             };
 
             button = new Button()

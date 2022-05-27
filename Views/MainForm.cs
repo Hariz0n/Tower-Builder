@@ -94,7 +94,7 @@ namespace TowerBuilder.Views
         {
             HideScreens();
             _endGameControl.Configure(_game);
-            _endGameControl.UpdateScore();
+            _endGameControl.UpdateText();
             _endGameControl.Show();
         }
         

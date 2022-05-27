@@ -10,8 +10,8 @@ namespace TowerBuilder.Views
     public partial class StartControl : UserControl
     {
         private Game _game;
-        private readonly TextBox _textBox;
         private TableLayoutPanel _tableLayoutPanel;
+        private readonly TextBox _textBox;
         private readonly Button button;
 
         public StartControl()
@@ -58,6 +58,13 @@ namespace TowerBuilder.Views
             Controls.Add(button);
         }
         
+        public void Configure(Game game)
+        {
+            if (_game != null)
+                return;
+            _game = game;
+        }
+        
         private void ButtonOnClick(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(_textBox.Text))
@@ -69,13 +76,6 @@ namespace TowerBuilder.Views
                 return;
             }
             _game.Introduce();
-        }
-
-        public void Configure(Game game)
-        {
-            if (_game != null)
-                return;
-            _game = game;
         }
     }
 }

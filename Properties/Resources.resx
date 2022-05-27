@@ -127,4 +127,14 @@
   <data name="Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TowerBuilder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Instruction" xml:space="preserve">
+    <value>Задача передельна проста - построить башню из блоков до самого конца. Чем выше блок, тем быстрее скорость. А также чем меньше блоков использовано, тем больше очков. Удачной игры!</value>
+    <comment>Instruction</comment>
+  </data>
+  <data name="Start a game" xml:space="preserve">
+    <value>Начать игру</value>
+  </data>
+  <data name="InstructionLabel" xml:space="preserve">
+    <value>Инструкция: </value>
+  </data>
 </root>

@@ -4,18 +4,17 @@ using System.Drawing;
 
 namespace TowerBuilder.Domain
 {
-    public class Field : IField
+    public class Field
     {
         private readonly Box[,] _field = null;
         public int Size { get; }
         public int Level { get; private set; }
         public int PseudoX { get; private set; }
-        public bool IsGameEnded = false;
+        public bool IsGameEnded;
         private Difficulty _difficulty;
         private bool Reversed { get; set; } = false;
 
         public event Action BlockMoved;
-
         public event Action LevelChanged;
         public event Action GameEnded; 
 
@@ -28,13 +27,14 @@ namespace TowerBuilder.Domain
             PseudoX = (size-1) / 2;
         }
 
-        public void PlaceBox(int x = 0, int y = 0)
+        public void PlaceBox()
         {
             if(IsGameEnded)
                 return;
             
             if (_field[PseudoX, Level] != null)
                 throw new ArgumentException("На данном поле уже есть блок");
+            
             _field[PseudoX, Level] = new Box();
             MoveBlockVertical(PseudoX, Level);
             PseudoX = (Size - 1) / 2;

@@ -4,6 +4,7 @@ namespace TowerBuilder.Domain
     {
         NotStarted = 0,
         Started = 1,
-        Finished = 2
+        Finished = 2,
+        Instruction = 4,
     }
 }

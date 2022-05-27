@@ -112,16 +112,18 @@ namespace Test
         public void IsGameStarting()
         {
             var game = new Game(Difficulty.Easy);
-            game.Start("PlayerA");
+            game.InitializePlayer("PlayerA");
+            game.Start();
             Assert.AreEqual(Stages.Started, game.Stage);
-            Assert.AreEqual("PlayerA", game.Player1.Name);
+            Assert.AreEqual("PlayerA", game.Player.Name);
         }
 
         [Test]
         public void IsGameFinishing()
         {
             var game = new Game(Difficulty.Easy);
-            game.Start("PlayerA");
+            game.InitializePlayer("Player1");
+            game.Start();
             game.EndGame();
             Assert.AreEqual(Stages.Finished, game.Stage);
         }
@@ -131,6 +133,26 @@ namespace Test
         {
             var game = new Game(Difficulty.Easy);
             Assert.AreEqual(Stages.NotStarted, game.Stage);
+        }
+
+        [Test]
+        public void GetCorrectScoreMaxImpossible()
+        {
+            var game = new Game(Difficulty.Easy);
+            game.InitializePlayer("Player");
+            Assert.AreEqual(4200, game.Player.GetScore());
+        }
+
+        [Test]
+        public void GetCorrectScoreMaxPossible()
+        {
+            var game = new Game(Difficulty.Easy);
+            game.InitializePlayer("Player");
+            for (int i = 0; i < 7; i++)
+            {
+                game.Player.Field.PlaceBox();
+            }
+            Assert.AreEqual(3500, game.Player.GetScore());
         }
     }
 }

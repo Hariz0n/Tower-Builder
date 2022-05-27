@@ -29,7 +29,7 @@ namespace TowerBuilder.Views
             if (_configured)
                 return;
             this._game = game;
-            _field = game.Player1.Field;
+            _field = game.Player.Field;
             _field.BlockMoved += Invalidate;
             _field.LevelChanged += FieldOnLevelChanged;
             _field.GameEnded += FieldOnGameEnded;
@@ -46,6 +46,8 @@ namespace TowerBuilder.Views
         {
             _timer.Stop();
             _configured = false;
+            _game.Player.GetScore();
+            _timer.Interval = 351;
             _game.ChangeStage(Stages.Finished);
         }
         

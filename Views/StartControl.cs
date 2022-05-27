@@ -61,8 +61,15 @@ namespace TowerBuilder.Views
         
         private void ButtonOnClick(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(_textBox.Text))
-                _game.Start(_textBox.Text, Difficulty.Easy);
+            if (string.IsNullOrEmpty(_textBox.Text))
+                return;
+            _game.InitializePlayer(_textBox.Text);
+            if (_game.IsInstructed)
+            {
+                _game.Start();
+                return;
+            }
+            _game.Introduce();
         }
 
         public void Configure(Game game)
